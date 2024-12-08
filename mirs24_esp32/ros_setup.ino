@@ -59,6 +59,20 @@ void ros_setup(){
     "/reset_encoder"
   );
 
+  rclc_service_init_default(
+    &jack_up_srv,
+    &node,
+    ROSIDL_GET_SRV_TYPE_SUPPORT(mirs_msgs, srv, SimpleCommand),
+    "/jack_up"
+  );
+
+  rclc_service_init_default(
+    &jack_down_srv,
+    &node,
+    ROSIDL_GET_SRV_TYPE_SUPPORT(mirs_msgs, srv, SimpleCommand),
+    "/jack_down"
+  );
+
   const uint32_t timer_timeout = 100;
 
   rclc_timer_init_default(
@@ -69,11 +83,13 @@ void ros_setup(){
   );
 
   //イベント発生の設定（数字はイベントの発生点の数）
-  rclc_executor_init(&executor, &support.context, 5, &allocator);
+  rclc_executor_init(&executor, &support.context, 7, &allocator);
   rclc_executor_add_subscription(&executor, &cmd_vel_sub, &cmd_vel_msg, &cmd_vel_Callback, ON_NEW_DATA);
   rclc_executor_add_subscription(&executor, &param_sub, &param_msg, &param_Callback, ON_NEW_DATA);
   rclc_executor_add_service(&executor, &update_srv, &update_req, &update_res, update_service_callback);
   rclc_executor_add_service(&executor, &reset_srv, &reset_req, &reset_res, reset_service_callback);
+  rclc_executor_add_service(&executor, &jack_up_srv, &jack_up_req, &jack_up_res, jack_up_callback);
+  rclc_executor_add_service(&executor, &jack_down_srv, &jack_down_req, &jack_down_res, jack_down_callback);
   rclc_executor_add_timer(&executor, &timer);
 }
 

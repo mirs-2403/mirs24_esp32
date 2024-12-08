@@ -17,10 +17,15 @@ std_msgs__msg__Float64MultiArray vlt_msg;             //電圧情報
 std_msgs__msg__Float64MultiArray curr_vel_msg;           //速度情報
 geometry_msgs__msg__Twist cmd_vel_msg;                    //速度指令値
 mirs_msgs__msg__BasicParam param_msg;                 //パラメーターメッセージ
-mirs_msgs__srv__ParameterUpdate_Response update_res;  
+mirs_msgs__srv__ParameterUpdate_Response update_res; 
 mirs_msgs__srv__ParameterUpdate_Request update_req;
 mirs_msgs__srv__SimpleCommand_Response reset_res;
 mirs_msgs__srv__SimpleCommand_Request reset_req;
+
+mirs_msgs__srv__SimpleCommand_Response jack_up_res; //ジャッキ上昇命令
+mirs_msgs__srv__SimpleCommand_Request jack_up_req;
+mirs_msgs__srv__SimpleCommand_Response jack_down_res; //ジャッキ下降命令
+mirs_msgs__srv__SimpleCommand_Request jack_down_req;
 
 rcl_publisher_t enc_pub;
 rcl_publisher_t vlt_pub;
@@ -29,6 +34,9 @@ rcl_subscription_t cmd_vel_sub;
 rcl_subscription_t param_sub;
 rcl_service_t update_srv;
 rcl_service_t reset_srv;
+
+rcl_service_t jack_up_srv;
+rcl_service_t jack_down_srv;
 
 rclc_executor_t executor;
 rclc_support_t support;
@@ -67,6 +75,7 @@ void setup() {
   encoder_open();
   vel_ctrl_set();
   vlt_setup();
+  jack_ctrl_set();
 
   delay(500);
 }

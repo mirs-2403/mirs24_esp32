@@ -34,3 +34,23 @@ void reset_service_callback(const void * req, void * res){
 
   res_in->success = true;
 }
+
+//  ジャッキ上昇サーバーのコールバック
+void jack_up_callback(const void * req, void * res){
+  mirs_msgs__srv__SimpleCommand_Request * req_in = (mirs_msgs__srv__SimpleCommand_Request *) req;
+  mirs_msgs__srv__SimpleCommand_Response * res_in = (mirs_msgs__srv__SimpleCommand_Response *) res;
+
+  jack_up();
+
+  res_in->success = true;
+}
+
+//  ジャッキ下降サーバーのコールバック
+void jack_down_callback(const void * req, void * res){
+  mirs_msgs__srv__SimpleCommand_Request * req_in = (mirs_msgs__srv__SimpleCommand_Request *) req;
+  mirs_msgs__srv__SimpleCommand_Response * res_in = (mirs_msgs__srv__SimpleCommand_Response *) res;
+
+  jack_down();
+
+  res_in->success = true;
+}
