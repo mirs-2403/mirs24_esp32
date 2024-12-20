@@ -68,6 +68,9 @@ void PID_control(){
     l_pwm = 0; 
   }
 
+  debug2 = r_pwm;
+  debug1 = l_pwm;
+
   //  pwm出力
   ledcWrite(r_Channel, uint8_t(r_pwm));
   ledcWrite(l_Channel, uint8_t(l_pwm));

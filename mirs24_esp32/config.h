@@ -1,9 +1,10 @@
+//エンコーダ用
 #define PIN_ENC_A_L 39
 #define PIN_ENC_B_L 36
 #define PIN_ENC_A_R 35
 #define PIN_ENC_B_R 34
 
-//足回り用モータードライバー用
+//足回り用
 #define PIN_DIR_R   25
 #define PIN_PWM_R   26
 #define PIN_DIR_L   32
@@ -20,11 +21,14 @@
 #define PIN_SW_DOWN 17
 
 //ジャッキ台形制御用パラメータ
-#define NEAR_END 100
+#define NEAR_END 2000
 
+
+//バッテリー用
 #define PIN_BATT_1  27
 #define PIN_BATT_2  4
 
+//絶対に設定しろ!!!!!!!
 #define ROS_DOMAIN_ID 90
 
 //足回り速度制御用

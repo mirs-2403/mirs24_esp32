@@ -40,7 +40,9 @@ void jack_up_callback(const void * req, void * res){
   mirs_msgs__srv__SimpleCommand_Request * req_in = (mirs_msgs__srv__SimpleCommand_Request *) req;
   mirs_msgs__srv__SimpleCommand_Response * res_in = (mirs_msgs__srv__SimpleCommand_Response *) res;
 
-  jack_up();
+  pthread_t thread_up;
+  pthread_create(&thread_up, NULL, jack_up, NULL);
+  //jack_test();
 
   res_in->success = true;
 }
@@ -50,7 +52,9 @@ void jack_down_callback(const void * req, void * res){
   mirs_msgs__srv__SimpleCommand_Request * req_in = (mirs_msgs__srv__SimpleCommand_Request *) req;
   mirs_msgs__srv__SimpleCommand_Response * res_in = (mirs_msgs__srv__SimpleCommand_Response *) res;
 
-  jack_down();
+  pthread_t thread_down;
+  pthread_create(&thread_down, NULL, jack_down, NULL);
+  //jack_down();
 
   res_in->success = true;
 }

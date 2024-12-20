@@ -83,6 +83,7 @@ void ros_setup(){
   );
 
   //イベント発生の設定（数字はイベントの発生点の数）
+  //デフォルトの発生点はsubscriberが2(/cmd_vel,/params)、serviceが2(/reset,/update)、timerが1（定期実行）の合計5
   rclc_executor_init(&executor, &support.context, 7, &allocator);
   rclc_executor_add_subscription(&executor, &cmd_vel_sub, &cmd_vel_msg, &cmd_vel_Callback, ON_NEW_DATA);
   rclc_executor_add_subscription(&executor, &param_sub, &param_msg, &param_Callback, ON_NEW_DATA);
